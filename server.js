@@ -1,9 +1,10 @@
+import * as dotenv from 'dotenv'
 import express from 'express'
-
-const url = 'https://api.codingthecurbs.fdnd.nl/api/v1'
 
 // Maak een nieuwe express app
 const app = express()
+
+dotenv.config()
 
 // Stel in hoe we express gebruiken
 app.set('view engine', 'ejs')
@@ -12,7 +13,7 @@ app.use(express.static('public'))
 
 // Maak een route voor de index
 app.get('/', (request, response) => {
-    let urlSmartzones = url + "/smartzones" 
+    let urlSmartzones = `${process.env.API_URL}/smartzones`
 
   fetchJson(urlSmartzones).then((data) => {
     response.render('index', data)
@@ -23,6 +24,13 @@ app.get('/nav', (request, response) => {
   response.render('nav')
 })
 
+app.get('/map', (request, response) => {
+  response.render('map')
+})
+
+// Stel afhandeling van formulieren in
+server.use(express.json())
+server.use(express.urlencoded({ extended: true }))
 
 // Stel het poortnummer in en start express
 app.set('port', process.env.PORT || 8000)

@@ -78,7 +78,7 @@ header img {
 
 .container-img {
     width: 4em;
-    height: 12em;
+    height: 13em;
     padding: 0;
 }
 
@@ -88,9 +88,18 @@ header img {
 
 .summary img {
     width: 4em;
-    height: 12em;
+    height: 13em;
     object-fit: cover;
 }
+
+.summary .container-li {
+    padding: 1rem;
+}
+
+.summary p {
+    padding: .5rem 0;
+}
+
 
 .summary li button {
     border-radius: 1em;
@@ -98,12 +107,18 @@ header img {
     color: var(--purple);
     border: solid 2px var(--purple);
     background-color: var(--white);
+    cursor: pointer;
 }
-s
+
 .summary li .book-now {
     color: var(--reserved-c);
     background: var(--reserved-bg);
     border: solid 2px var(--reserved-bg);
+}
+
+.summary li .info-button{
+    border: none;
+
 }
 
 nav {
