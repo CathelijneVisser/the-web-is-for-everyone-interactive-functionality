@@ -1,0 +1,32 @@
+<%- include("./partials/head.ejs") %>
+
+<%- include("./partials/summary.ejs") %>
+
+<form action="" method="post">
+    <fieldset>
+        <legend><span>Smartzone</span></legend>
+
+        <label for="smartzones">Selecteer de smartzone</label>
+        <select required id="smartzones" name="smartzone">
+            <% smartzones.forEach(smartzone => { %>
+                <option value="<%= smartzone.id %>"><%= smartzone.name %></option>
+            <% }) %>
+        </select>
+
+        <label for="time"></label>
+        <imput type="time" id="time"></imput>
+
+        <input type="submit" value="submit" />
+        
+    </fieldset>
+        <legend><span>Persoonlijke gegevens</span></legend>
+
+    <fieldset>
+    
+    </fieldset>
+</form>
+
+<%- include("./partials/nav.ejs") %>
+
+<%- include("./partials/foot.ejs") %>
+

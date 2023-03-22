@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-import express from 'express'
+import express, { request, response } from 'express'
 
 // Maak een nieuwe express app
 const app = express()
@@ -11,7 +11,7 @@ app.set('view engine', 'ejs')
 app.set('views', './views')
 app.use(express.static('public'))
 
-// Maak een route voor de index
+// Maak de routes aan
 app.get('/', (request, response) => {
     let urlSmartzones = `${process.env.API_URL}/smartzones`
 
@@ -20,17 +20,47 @@ app.get('/', (request, response) => {
   })
 })
 
+app.get('/book', (request, response) => {
+  let urlSmartzones = `${process.env.API_URL}/smartzones`
+
+  fetchJson(urlSmartzones).then((data) => {
+    response.render('book', data)
+  })
+})
+
+app.get('/book', (request, response) => {
+  let url = `${process.env.API_URL}reservations?id=clene4gw60aqg0bunwwpawr1p`
+
+  fetchJson(url).then((data) => {
+    response.render('book', data)
+  })
+})
+
+  // app.post('/', (request, Response) => {
+  //   let url = `${process.env.API_URL}/smartzoness`
+
+  //   postJson(url, request.body).then((data) => {
+
+  // })
+  // })
+
+app.get('/summary', (request, response) => {
+  response.render('summary')
+})
+
 app.get('/nav', (request, response) => {
   response.render('nav')
 })
 
 app.get('/map', (request, response) => {
+
   response.render('map')
 })
 
+
 // Stel afhandeling van formulieren in
-server.use(express.json())
-server.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 // Stel het poortnummer in en start express
 app.set('port', process.env.PORT || 8000)
@@ -45,6 +75,24 @@ app.listen(app.get('port'), function () {
  */
 async function fetchJson(url) {
   return await fetch(url)
+    .then((response) => response.json())
+    .catch((error) => error)
+}
+
+/**
+ * postJson() is a wrapper for the experimental node fetch api. It fetches the url
+ * passed as a parameter using the POST method and the value from the body paramater
+ * as a payload. It returns the response body parsed through json.
+ * @param {*} url the api endpoint to address
+ * @param {*} body the payload to send along
+ * @returns the json response from the api endpoint
+ */
+export async function postJson(url, body) {
+  return await fetch(url, {
+    method: 'post',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+  })
     .then((response) => response.json())
     .catch((error) => error)
 }
