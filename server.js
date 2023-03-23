@@ -11,6 +11,11 @@ app.set('view engine', 'ejs')
 app.set('views', './views')
 app.use(express.static('public'))
 
+
+// Stel afhandeling van formulieren in
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 // Maak de routes aan
 app.get('/', (request, response) => {
     let urlSmartzones = `${process.env.API_URL}/smartzones`
@@ -37,13 +42,33 @@ app.get('/book', (request, response) => {
   })
 })
 
-  // app.post('/', (request, Response) => {
-  //   let url = `${process.env.API_URL}/smartzoness`
+  app.post('/', (request, response) => {
+    console.log(request.body)
+    request.body.timeStart = request.body.dateStart + 'T' + request.body.timeStart + ':00Z';
+    request.body.timeEnd = request.body.dateEnd + 'T' + request.body.timeEnd + ':00Z';    
+    let url = `${process.env.API_URL}/reservations`
+    postJson(url, request.body).then((data) => {
+      let newReservation = { ... request.body}
+      console.log(JSON.stringify(data))
+     if (data.success) {
+          response.redirect('/?reservationPosted')
+      }
+      else {
+      const errorMessage = data.message
+      const newData = { error: errorMessage, values: newReservation }
 
-  //   postJson(url, request.body).then((data) => {
-
-  // })
-  // })
+        let urlSmartzones = `${process.env.API_URL}/smartzones`
+        fetchJson(urlSmartzones).then((smartzones) => {
+          let id = request.query.id || 'clene4gw60aqg0bunwwpawr1p'
+          let url = `${process.env.API_URL}/reservations?id=${id}`
+          fetchJson(url).then((reservations) => {
+            let data = {smartzones: smartzones, reservations: reservations}
+            response.render('book', data)
+          })
+        })
+      }
+    })
+  })
 
 app.get('/summary', (request, response) => {
   response.render('summary')
@@ -59,9 +84,6 @@ app.get('/map', (request, response) => {
 })
 
 
-// Stel afhandeling van formulieren in
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 
 // Stel het poortnummer in en start express
 app.set('port', process.env.PORT || 8000)

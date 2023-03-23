@@ -189,3 +189,7 @@ fieldset {
     padding: 1rem;
 }
 
+form input, form label {
+    display: block;
+}
+
