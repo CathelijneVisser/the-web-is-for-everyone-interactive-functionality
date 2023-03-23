@@ -4,24 +4,25 @@
 
 <form action="" method="post">
     <fieldset>
-        <legend><span>Smartzone</span></legend>
-
-        <label for="smartzones">Selecteer de smartzone</label>
+        <label for="smartzones">Select the smartzone</label>
         <select required id="smartzones" name="smartzone">
-            <% smartzones.forEach(smartzone => { %>
+            <% smartzones.smartzones.forEach(smartzone => { %>
                 <option value="<%= smartzone.id %>"><%= smartzone.name %></option>
             <% }) %>
         </select>
 
-        <label for="time"></label>
-        <imput type="time" id="time"></imput>
+        <label for="author">Name</label>
+        <input required id="author"></input>
+
+        <label for="timeStart">Begin time</label>
+        <input required type="timeStart" id="time"></input>
+
+        <label for="timeEnd">End time</label>
+        <input required type="timeEnd" id="time"></input>
 
         <input type="submit" value="submit" />
         
-    </fieldset>
-        <legend><span>Persoonlijke gegevens</span></legend>
-
-    <fieldset>
+        
     
     </fieldset>
 </form>

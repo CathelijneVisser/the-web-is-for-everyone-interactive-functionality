@@ -14,25 +14,26 @@ app.use(express.static('public'))
 // Maak de routes aan
 app.get('/', (request, response) => {
     let urlSmartzones = `${process.env.API_URL}/smartzones`
-
-  fetchJson(urlSmartzones).then((data) => {
-    response.render('index', data)
+  fetchJson(urlSmartzones).then((smartzones) => {
+    let id = request.query.id || 'clene4gw60aqg0bunwwpawr1p'
+    let url = `${process.env.API_URL}/reservations?id=${id}`
+    fetchJson(url).then((reservations) => {
+      let data = {smartzones: smartzones, reservations: reservations} 
+      response.render('index', data)
+    })
   })
 })
+
 
 app.get('/book', (request, response) => {
   let urlSmartzones = `${process.env.API_URL}/smartzones`
-
-  fetchJson(urlSmartzones).then((data) => {
-    response.render('book', data)
-  })
-})
-
-app.get('/book', (request, response) => {
-  let url = `${process.env.API_URL}reservations?id=clene4gw60aqg0bunwwpawr1p`
-
-  fetchJson(url).then((data) => {
-    response.render('book', data)
+  fetchJson(urlSmartzones).then((smartzones) => {
+    let id = request.query.id || 'clene4gw60aqg0bunwwpawr1p'
+    let url = `${process.env.API_URL}/reservations?id=${id}`
+    fetchJson(url).then((reservations) => {
+      let data = {smartzones: smartzones, reservations: reservations}
+      response.render('book', data)
+    })
   })
 })
 
