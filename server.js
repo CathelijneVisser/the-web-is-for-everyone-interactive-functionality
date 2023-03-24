@@ -43,7 +43,6 @@ app.get('/book', (request, response) => {
 })
 
   app.post('/', (request, response) => {
-    console.log(request.body)
     request.body.timeStart = request.body.dateStart + 'T' + request.body.timeStart + ':00Z';
     request.body.timeEnd = request.body.dateEnd + 'T' + request.body.timeEnd + ':00Z';    
     let url = `${process.env.API_URL}/reservations`
