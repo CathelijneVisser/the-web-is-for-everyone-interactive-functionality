@@ -42,11 +42,13 @@ app.get('/book', (request, response) => {
 })
 
   app.post('/', (request, response) => {
+    console.log("request.body", request.body);
     request.body.timeStart = request.body.dateStart + 'T' + request.body.timeStart + ':00Z';
     request.body.timeEnd = request.body.dateEnd + 'T' + request.body.timeEnd + ':00Z';    
     let url = `${process.env.API_URL}/reservations`
     postJson(url, request.body).then((data) => {
       let newReservation = { ... request.body}
+      console.log(JSON.stringify(request.body))
       console.log(JSON.stringify(data))
      if (data.success) {
           response.redirect('/?reservationPosted')
@@ -81,6 +83,10 @@ app.get('/map', (request, response) => {
   response.render('map')
 })
 
+app.get('/form', (request, response) => {
+
+  response.render('form')
+})
 
 
 // Stel het poortnummer in en start express

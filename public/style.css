@@ -106,7 +106,7 @@ header img {
 }
 
 
-.summary li button {
+.summary li a {
     border-radius: 1em;
     padding: .25em .5em;
     color: var(--purple);
@@ -124,6 +124,10 @@ header img {
 .summary li .info-button{
     border: none;
 
+}
+
+.summary svg, .info-button {
+    background-color: var(--white);
 }
 
 /* nav */

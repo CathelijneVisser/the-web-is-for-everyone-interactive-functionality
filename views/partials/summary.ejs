@@ -36,12 +36,12 @@
                                 </p>
                                 <p><span>Price:</span> €1,00 / 15 min</p>
                                 <% if (smartzone.reservation==null) { %>
-                                    <button class="book-now" style="--reserved-bg: #f6f6fc; --reserved-c: #6a6b7b;">Book
-                                        now</button>
+                                    <a href="" class="book-now" style="--reserved-bg: #f6f6fc; --reserved-c: #6a6b7b;">Book
+                                        now</a> 
                                     <% } else { %>
-                                        <a href="" class="book-now">Book now</a>
+                                        <a href="/book" class="book-now">Book now</a>
                                         <% } %>
-                                            <a href="http://localhost:8000/book?id=<%= smartzone.id %>">Book later</a>
+                                            <a href="/book?id=<%= smartzone.id %>">Book later</a>
                                             <button class="info-button" title="meer informatie">
                                                 <svg class="info-svg" xmlns="http://www.w3.org/2000/svg" width="21"
                                                     height="21" viewBox="0 0 21 21" fill="none">

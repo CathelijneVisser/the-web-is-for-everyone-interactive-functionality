@@ -1,6 +1,24 @@
-const startDate = document.getElementById(dateStart)
-const endDate = document.getElementById(dateEnd)
+const startDate = document.getElementById("dateStart")
+const endDate = document.getElementById("dateEnd")
 
-startDate.addEventListener("change", () => {
-    console.log("keuze is gemaakt")
-})
+startDate.onchange = () => {
+    endDate.value = startDate.value
+}
+
+startDate.value = formatDate();
+
+startDate.value = new Date().toISOString().split('T')[0];
+
+
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+function formatDate(date = new Date()) {
+  return [
+    date.getFullYear(),
+    padTo2Digits(date.getMonth() + 1),
+    padTo2Digits(date.getDate()),
+  ].join('-');
+}
+
