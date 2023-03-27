@@ -9,8 +9,7 @@ dotenv.config()
 // Stel in hoe we express gebruiken
 app.set('view engine', 'ejs')
 app.set('views', './views')
-app.use(express.static('public'))
-
+app.use(express.static('public'));
 
 // Stel afhandeling van formulieren in
 app.use(express.json())
