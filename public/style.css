@@ -1,7 +1,37 @@
 @font-face {
-	font-family: "Rajdhani";
-	src: url("../assets/fonts/Rajdhani-SemiBold.ttf") format("ttf"),
-		url("../assets/fonts/Rajdhani-SemiBold.woff") format("woff");
+
+    font-family: "Rajhandi";
+
+    src: url("assets/fonts/Rajdhani-Regular.ttf") format("ttf"),
+
+        url("assets/fonts/Rajdhani-Regular.woff") format("woff");
+
+        font-weight: 400;
+
+}
+
+@font-face {
+
+    font-family: "Rajhandi";
+
+    src: url("assets/fonts/Rajdhani-SemiBold.ttf") format("ttf"),
+
+        url("assets/fonts/Rajdhani-SemiBold.woff") format("woff");
+
+        font-weight: 600;
+
+}
+
+@font-face {
+
+    font-family: "Rajhandi";
+
+    src: url("assets/fonts/Rajdhani-Bold.ttf") format("ttf"),
+
+        url("assets/fonts/Rajdhani-Bold.woff") format("woff");
+
+        font-weight: 700;
+
 }
 
 * {
@@ -20,6 +50,7 @@
     --gray: #737373;    
     --reserved-bg: linear-gradient(90deg, #524dd0, #84389e); 
     --reserved-c: white;
+    --blue: #00ffec;
 }
 
 body {
@@ -48,7 +79,7 @@ header {
 header img {
     width: fit-content;
     height: auto;
-    margin: .5em;   
+    margin: 1.10em;   
     object-fit: cover;
 }
 
@@ -67,7 +98,9 @@ header img {
 
 .summary h2 {
     color: var(--gray);
-    font-size: medium;
+    font-size: 1.8rem;
+    align-self: flex-start;
+    margin-left: 1rem;
 }
 
 .summary .smartzones li {
@@ -101,18 +134,37 @@ header img {
     padding: 1rem;
 }
 
-.summary p {
-    padding: .5rem 0;
+.summary h3 {
+    padding-top: .5rem;
+    font-weight: 700;
 }
 
+.summary svg {
+    margin-right: .5rem;
+}
+
+.summary p {
+    padding-top: .5rem;
+    display: flex;
+}
+
+.last-p span {
+    font-weight: 600;
+}
+
+.last-p {
+    margin-bottom: 1rem;
+}
 
 .summary li a {
     border-radius: 1em;
-    padding: .25em .5em;
+    padding: .10em .25em;
     color: var(--purple);
     border: solid 2px var(--purple);
     background-color: var(--white);
     cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
 }
 
 .summary li .book-now {
@@ -123,12 +175,14 @@ header img {
 
 .summary li .info-button{
     border: none;
-
+    margin-top: .5rem;
 }
 
 .summary svg, .info-button {
     background-color: var(--white);
 }
+
+
 
 /* nav */
 
@@ -161,6 +215,7 @@ nav a {
     align-items: center;
 }
 
+
 /* detail */
 
 .detail {
@@ -186,14 +241,35 @@ form {
     width: 50vw;
     margin: auto;
     margin-top: 5vh;
-    background-color: var(--b-white);
 }
 
 fieldset {
     padding: 1rem;
+    border: none;
 }
 
-form input, form label {
+form h4 {
+    font-size: 2rem;
+}
+
+form select {
+    width: 25rem;
+    height: 2rem;
+}
+
+form input {
     display: block;
+    width: 25rem;
+    height: 2rem;
 }
 
+form label {
+    display: block;
+    margin-top: 1rem;
+}
+
+form button {
+    width: 5rem;
+    height: 1.5rem;
+    margin-top: 1rem;
+}
