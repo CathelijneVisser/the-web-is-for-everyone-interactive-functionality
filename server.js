@@ -23,7 +23,7 @@ app.get('/', (request, response) => {
     let url = `${process.env.API_URL}/reservations?id=${id}`
     fetchJson(url).then((reservations) => {
       let data = {smartzones: smartzones, reservations: reservations} 
-      response.render('index', data)
+      response.render('index', {smartzones: data.smartzones.smartzones})
     })
   })
 })
@@ -33,10 +33,12 @@ app.get('/book', (request, response) => {
   let urlSmartzones = `${process.env.API_URL}/smartzones`
   fetchJson(urlSmartzones).then((smartzones) => {
     let id = request.query.id || 'clene4gw60aqg0bunwwpawr1p'
+    let time = request.query.time
     let url = `${process.env.API_URL}/reservations?id=${id}`
     fetchJson(url).then((reservations) => {
       let data = {smartzones: smartzones, reservations: reservations}
-      response.render('book', data)
+      response.render('book', {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time})
+
     })
   })
 })

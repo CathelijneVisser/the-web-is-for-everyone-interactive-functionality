@@ -3,21 +3,33 @@
         <h4>Book a smartzone</h4>
         <label for="smartzones">Select the smartzone</label>
         <select required id="smartzones" name="smartzoneId">
-            <% smartzones.smartzones.forEach(smartzone=> { %>
-                <option value="<%= smartzone.id %>">
+            <% smartzones.forEach(smartzone=> { %>
+                <option value="<%= smartzone.id %>" 
+                    <% if (smartzone.id == selectedSmartzoneId) { %>
+                        selected 
+                    <% } %>
+                >
                     <%= smartzone.name %>
                 </option>
-                <% }) %>
+                <% }) %>    
         </select>
 
         <label for="author">Name</label>
         <input required id="author" name="author">
 
         <label for="dateStart">Begin date</label>
-        <input required id="dateStart" type="date" name="dateStart" min="27-03-2023">
+        <input required id="dateStart" type="date" name="dateStart" min="<%= new Date().toISOString().split('T')[0] %>"
+            <% if (time=="now" ) { %>
+                value="<%= new Date().toISOString().split('T')[0] %>"
+            <% } %>
+        >
 
         <label for="dateEnd">End date</label>
-        <input required id="dateEnd" type="date" name="dateEnd">
+        <input required id="dateEnd" type="date" name="dateEnd" min="<%= new Date().toISOString().split('T')[0] %>"
+            <% if (time == "now") { %>
+                value="<%= new Date().toISOString().split('T')[0] %>"
+            <% } %>
+        >
 
         <label for="timeStart">Begin time</label>
         <input required type="time" id="timeStart" name="timeStart">

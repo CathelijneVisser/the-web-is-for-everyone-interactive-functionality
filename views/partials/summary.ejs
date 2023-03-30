@@ -2,7 +2,7 @@
 
     <h2>Smartzones</h2>
     <ul class="smartzones">
-        <% smartzones.smartzones.forEach(smartzone=> { %>
+        <% smartzones.forEach(smartzone=> { %>
             <li>
                 <div class="container-img">
                     <img src="<%= smartzone.image[0].url %>" alt="">
@@ -43,7 +43,7 @@
                                     <a class="book-now" style="--reserved-bg: #f6f6fc; --reserved-c: #6a6b7b;">Book
                                         now</a> 
                                     <% } else { %>
-                                        <a href="/book?id=<%= smartzone.id %>" class="book-now book-now-active">Book now</a>
+                                        <a href="/book?id=<%= smartzone.id %>&time=now" class="book-now book-now-active">Book now</a>
                                         <% } %>
                                             <a href="/book?id=<%= smartzone.id %>">Book later</a>
                                             
