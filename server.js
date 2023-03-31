@@ -38,7 +38,6 @@ app.get('/book', (request, response) => {
     fetchJson(url).then((reservations) => {
       let data = {smartzones: smartzones, reservations: reservations}
       response.render('book', {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time})
-
     })
   })
 })
@@ -65,7 +64,7 @@ app.get('/book', (request, response) => {
           let url = `${process.env.API_URL}/reservations?id=${id}`
           fetchJson(url).then((reservations) => {
             let data = {smartzones: smartzones, reservations: reservations}
-            response.render('book', data)
+            response.render('book', {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time})
           })
         })
       }
