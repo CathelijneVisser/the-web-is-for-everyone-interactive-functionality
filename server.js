@@ -18,13 +18,8 @@ app.use(express.urlencoded({ extended: true }))
 // Maak de routes aan
 app.get('/', (request, response) => {
     let urlSmartzones = `${process.env.API_URL}/smartzones`
-  fetchJson(urlSmartzones).then((smartzones) => {
-    let id = request.query.id || 'clene4gw60aqg0bunwwpawr1p'
-    let url = `${process.env.API_URL}/reservations?id=${id}`
-    fetchJson(url).then((reservations) => {
-      let data = {smartzones: smartzones, reservations: reservations} 
-      response.render('index', {smartzones: data.smartzones.smartzones})
-    })
+  fetchJson(urlSmartzones).then((data) => {
+    response.render('index', {smartzones: data.smartzones})
   })
 })
 
@@ -36,22 +31,21 @@ app.get('/book', (request, response) => {
     let time = request.query.time
     let url = `${process.env.API_URL}/reservations?id=${id}`
     fetchJson(url).then((reservations) => {
+      
       let data = {smartzones: smartzones, reservations: reservations}
       response.render('book', {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time})
     })
   })
 })
 
-  app.post('/', (request, response) => {
-    console.log("request.body", request.body);
+  app.post('/post', (request, response) => {
     request.body.timeStart = request.body.dateStart + 'T' + request.body.timeStart + ':00Z';
     request.body.timeEnd = request.body.dateEnd + 'T' + request.body.timeEnd + ':00Z';    
     let url = `${process.env.API_URL}/reservations`
     postJson(url, request.body).then((data) => {
       let newReservation = { ... request.body}
-      console.log(JSON.stringify(request.body))
-      console.log(JSON.stringify(data))
-     if (data.success) {
+      console.log("data", data)
+     if (data.data.id.length > 0) {
           response.redirect('/?reservationPosted')
       }
       else {
@@ -61,7 +55,10 @@ app.get('/book', (request, response) => {
         let urlSmartzones = `${process.env.API_URL}/smartzones`
         fetchJson(urlSmartzones).then((smartzones) => {
           let id = request.query.id || 'clene4gw60aqg0bunwwpawr1p'
+          let time = request.query.time
+          let selectedSmartzoneId = id
           let url = `${process.env.API_URL}/reservations?id=${id}`
+
           fetchJson(url).then((reservations) => {
             let data = {smartzones: smartzones, reservations: reservations}
             response.render('book', {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time})
