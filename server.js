@@ -48,7 +48,7 @@ app.get('/book', (request, response) => {
      if (data.data.id.length > 0) { //als het gelukt is om het te posten
           response.redirect('/?reservationPosted') //dan word de pagina opnieuw geladen met wat extra's in de url
       }
-      else { //anders
+      else { //als het niet gelukt is
       const errorMessage = data.message //als er een foutmelding is word die in een variable gezet
       const newData = { error: errorMessage, values: newReservation } //de foutmelding word met de gegevens in een variable gezet
 
