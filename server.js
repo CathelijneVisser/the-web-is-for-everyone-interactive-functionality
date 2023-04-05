@@ -15,72 +15,75 @@ app.use(express.static('public'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// Maak de routes aan
+// gegevens uit API naar index pagina doorsturen
 app.get('/', (request, response) => {
-    let urlSmartzones = `${process.env.API_URL}/smartzones`
-  fetchJson(urlSmartzones).then((data) => {
-    response.render('index', {smartzones: data.smartzones})
+    let urlSmartzones = `${process.env.API_URL}/smartzones` //url maken met het deel uit de .env
+  fetchJson(urlSmartzones).then((data) => { //fetch functie aanroepen en data ophalen
+    response.render('index', {smartzones: data.smartzones}) //data doorsturen en pagina laden
   })
 })
 
-
+//gegevens uit API naar book pagina doorsturen
 app.get('/book', (request, response) => {
-  let urlSmartzones = `${process.env.API_URL}/smartzones`
-  fetchJson(urlSmartzones).then((smartzones) => {
+  let urlSmartzones = `${process.env.API_URL}/smartzones` //url maken en uit .env halen
+  fetchJson(urlSmartzones).then((smartzones) => { //fetch functie 
     let id = request.query.id || 'clene4gw60aqg0bunwwpawr1p'
     let time = request.query.time
     let url = `${process.env.API_URL}/reservations?id=${id}`
-    fetchJson(url).then((reservations) => {
+    fetchJson(url).then((reservations) => { //info uit fetch functie 1 word meegegeven aan functie 2
       
-      let data = {smartzones: smartzones, reservations: reservations}
-      response.render('book', {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time})
+      let data = {smartzones: smartzones, reservations: reservations} //alle opgehaalde info samenvoegen
+      response.render('book', {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time}) //de pagina maken en laten zien met alle meegegeven info
     })
   })
 })
 
-  app.post('/post', (request, response) => {
-    request.body.timeStart = request.body.dateStart + 'T' + request.body.timeStart + ':00Z';
-    request.body.timeEnd = request.body.dateEnd + 'T' + request.body.timeEnd + ':00Z';    
-    let url = `${process.env.API_URL}/reservations`
-    postJson(url, request.body).then((data) => {
-      let newReservation = { ... request.body}
-      console.log("data", data)
-     if (data.data.id.length > 0) {
-          response.redirect('/?reservationPosted')
+//gegevens van het formulierw naar API sturen
+  app.post('/post', (request, response) => { 
+    request.body.timeStart = request.body.dateStart + 'T' + request.body.timeStart + ':00Z'; //data in juiste format zetten
+    request.body.timeEnd = request.body.dateEnd + 'T' + request.body.timeEnd + ':00Z';    //data in juiste format zetten
+    let url = `${process.env.API_URL}/reservations` //url maken met deel uit .env
+    postJson(url, request.body).then((data) => { //post functie aanroepen
+      let newReservation = { ... request.body} //gegevens formulier in een variable zetten
+     if (data.data.id.length > 0) { //als het gelukt is om het te posten
+          response.redirect('/?reservationPosted') //dan word de pagina opnieuw geladen met wat extra's in de url
       }
-      else {
-      const errorMessage = data.message
-      const newData = { error: errorMessage, values: newReservation }
+      else { //anders
+      const errorMessage = data.message //als er een foutmelding is word die in een variable gezet
+      const newData = { error: errorMessage, values: newReservation } //de foutmelding word met de gegevens in een variable gezet
 
-        let urlSmartzones = `${process.env.API_URL}/smartzones`
-        fetchJson(urlSmartzones).then((smartzones) => {
-          let id = request.query.id || 'clene4gw60aqg0bunwwpawr1p'
-          let time = request.query.time
-          let selectedSmartzoneId = id
-          let url = `${process.env.API_URL}/reservations?id=${id}`
+        let urlSmartzones = `${process.env.API_URL}/smartzones` //de url word gemaakt met een deel uit de .env
+        fetchJson(urlSmartzones).then((smartzones) => { //de data die nodig is om de site opniew te laden word opgehaald
+          let id = request.query.id || 'clene4gw60aqg0bunwwpawr1p' //smartzone id dat geselcteerd was in een variable zetten
+          let time = request.query.time //geselecteerde tijd in een variable zetten
+          let url = `${process.env.API_URL}/reservations?id=${id}` //url die word gemaakt met een deel uit de .env
 
-          fetchJson(url).then((reservations) => {
-            let data = {smartzones: smartzones, reservations: reservations}
-            response.render('book', {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time})
+          fetchJson(url).then((reservations) => { //de data uit de vorige fetch word meegegeven in deze fetch
+            let data = {smartzones: smartzones, reservations: reservations} //alle data samenvoegen om in een keer te versturen
+            response.render('book', {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time}) //de pagina laden met alle info die nodig is
           })
         })
       }
     })
   })
 
+//route naar summary
 app.get('/summary', (request, response) => {
   response.render('summary')
 })
 
+//route naar nav
 app.get('/nav', (request, response) => {
   response.render('nav')
 })
 
+//route naar map
 app.get('/map', (request, response) => {
 
   response.render('map')
 })
 
+//route naar form
 app.get('/form', (request, response) => {
 
   response.render('form')
