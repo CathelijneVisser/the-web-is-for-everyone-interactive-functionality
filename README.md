@@ -15,9 +15,7 @@
 ## Beschrijving
 <!-- In de Beschrijving staat hoe je project er uit ziet, hoe het werkt en wat je er mee kan. -->
 Deze site heeft aan de rechter kant een lijst staan met alle smartzones. Er staat informatie over de smartzones en het plan is om er ook als je op een smartzone klikt extra informatie te voorschijn te laten komen. Aan de rechter kant komt een kaart met alle smartzones aangegeven.
-<img src="
-https://user-images.githubusercontent.com/112855711/230025716-d8feb614-9077-4a6f-9b18-cb507575711a.png
-">
+<img src="https://user-images.githubusercontent.com/112855711/230025716-d8feb614-9077-4a6f-9b18-cb507575711a.png">
 
 <!-- Voeg een mooie poster visual toe 📸 -->
 <!-- Voeg een link toe naar Github Pages 🌐-->
