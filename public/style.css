@@ -96,9 +96,9 @@ header img {
     overflow: auto;
 }
 
-.summary h2 {
+.summary h3 {
     color: var(--gray);
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     align-self: flex-start;
     margin-left: 1rem;
 }
@@ -134,7 +134,7 @@ header img {
     padding: 1rem;
 }
 
-.summary h3 {
+.summary h4 {
     padding-top: .5rem;
     font-weight: 700;
 }
@@ -160,17 +160,27 @@ header img {
     border-radius: 1em;
     padding: .10em .25em;
     color: var(--purple);
-    border: solid 2px var(--purple);
     background-color: var(--white);
     cursor: pointer;
     white-space: nowrap;
     text-decoration: none;
+    height: 22px;
+    width: 84px;
+}
+
+.summary .button-container {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.summary li .book-later {
+    border: solid 2px var(--purple);
 }
 
 .summary li .book-now {
     color: var(--reserved-c);
     background: var(--reserved-bg);
-    border: solid 2px var(--reserved-bg);
 }
 
 .summary li .info-button{
@@ -213,8 +223,17 @@ nav a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none;
+    color: var(--purple);
 }
 
+nav a:visited {
+    color: var(--purple);
+}
+
+nav .active {
+    border-top: 5px solid var(--blue);
+}
 
 /* detail */
 
@@ -240,7 +259,7 @@ iframe {
 form {
     width: 50vw;
     margin: auto;
-    margin-top: 5vh;
+    margin-top: 6vh;
 }
 
 fieldset {
@@ -248,7 +267,7 @@ fieldset {
     border: none;
 }
 
-form h4 {
+form h2 {
     font-size: 2rem;
 }
 
@@ -272,4 +291,8 @@ form button {
     width: 5rem;
     height: 1.5rem;
     margin-top: 1rem;
+    border-radius: 1em;
+    background: var(--gradient);
+    border: none;
+    color: var(--white);
 }

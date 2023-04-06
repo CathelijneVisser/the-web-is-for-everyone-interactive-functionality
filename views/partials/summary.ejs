@@ -1,6 +1,6 @@
 <section class="summary">
 
-    <h2>Smartzones</h2>
+    <h3>Smartzones</h3>
     <ul class="smartzones">
         <% smartzones.forEach(smartzone=> { %>
             <li>
@@ -33,19 +33,21 @@
                         <% } %>
                     </p>
 
-                                <h3>SZ <%= smartzone.name %>
-                                </h3>
+                                <h4>SZ <%= smartzone.name %>
+                                </h4>
                                 <p>
                                     <%= smartzone.address %>, <%= smartzone.town %>
                                 </p>
                                 <p class="last-p"><span>Price:</span> €1,00 / 15 min</p>
-                                <% if (smartzone.reservation/=null) { %>
-                                    <a class="book-now" style="--reserved-bg: #f6f6fc; --reserved-c: #6a6b7b;">Book
-                                        now</a> 
-                                    <% } else { %>
-                                        <a href="/book?id=<%= smartzone.id %>&time=now" class="book-now book-now-active">Book now</a>
-                                        <% } %>
-                                            <a href="/book?id=<%= smartzone.id %>">Book later</a>
+                                <div class="button-container">
+                                    <% if (smartzone.reservation/=null) { %>
+                                        <a class="book-now" style="--reserved-bg: #f6f6fc; --reserved-c: #6a6b7b;">Book
+                                            now</a> 
+                                        <% } else { %>
+                                            <a href="/book?id=<%= smartzone.id %>&time=now" class="book-now book-now-active">Book now</a>
+                                            <% } %>
+                                                <a class="book-later" href="/book?id=<%= smartzone.id %>">Book later</a>
+                                </div>
                                             
                 </div>
             </li>
